@@ -1,126 +1,94 @@
-# AI Builders Discussion Thread Creator
+# AI Builders Community Landing Page
 
-This toolkit creates GitHub Discussion threads in the [AI Builders community](https://github.com/AI-Product-Development/aibuilders/discussions) from markdown files in the [wiki challenges directory](https://github.com/AI-Product-Development/wiki/tree/main/challenges).
+A modern, responsive landing page for the [AI Builders Community GitHub Discussions](https://github.com/AI-Product-Development/aibuilders/discussions).
 
-## 🚀 Quick Start
+## 🌐 Live Site
 
-### Prerequisites
-
-1. **Install GitHub CLI**:
-   ```bash
-   winget install --id GitHub.cli
-   ```
-
-2. **Authenticate with GitHub**:
-   ```bash
-   gh auth login
-   ```
-
-3. **Ensure you have Node.js installed** (for the JavaScript version):
-   - Download from [nodejs.org](https://nodejs.org/)
-
-### Usage Options
-
-#### Option 1: Node.js Script (Recommended for Windows)
-```bash
-node create-aibuilders-discussions.js
-```
-
-#### Option 2: Bash Script (Requires WSL or Git Bash)
-```bash
-# Make executable (if using WSL/Git Bash)
-chmod +x create-aibuilders-discussions.sh
-./create-aibuilders-discussions.sh
-```
-
-#### Option 3: Windows Batch Helper
-```batch
-run-script.bat
-```
-
-## 📁 What It Does
-
-1. **Sources**: Pulls markdown files from `AI-Product-Development/wiki/challenges`
-2. **Targets**: Creates discussions in `AI-Product-Development/aibuilders/discussions`
-3. **Category**: Automatically uses the "Challenges or Collaborations" category
-4. **Enhances**: Adds community participation guidelines to each challenge
+**[https://rsham004.github.io/aibuilders-landing/](https://rsham004.github.io/aibuilders-landing/)**
 
 ## ✨ Features
 
-- **🎯 Challenge Enhancement**: Adds community-focused formatting
-- **📋 Category Detection**: Automatically finds the right discussion category
-- **🔄 Rate Limiting**: Respects GitHub API limits with delays
-- **📊 Progress Tracking**: Shows detailed progress and results
-- **🧹 Cleanup**: Handles temporary files automatically
-- **📁 Results Logging**: Saves all created discussion URLs
+- **📊 Live Discussion Feed** - Displays all community discussions with real-time data
+- **🕒 Recent Activity** - Shows the latest discussion updates and new posts
+- **🔍 Search & Filter** - Find discussions by title, content, or category
+- **📱 Responsive Design** - Works perfectly on desktop and mobile devices
+- **⚡ Real-time Updates** - Auto-refreshes recent changes every 5 minutes
+- **🎨 Modern UI** - Clean, GitHub-style interface with smooth animations
 
-## 📊 Output Files
+## 🏗️ Built With
 
-After running, you'll get:
-- `created-discussions.txt` - List of all created discussion URLs
-- `aibuilders-discussions-results.json` - Detailed results with metadata
-- `temp_wiki/` - Temporary clone (automatically cleaned up)
+- **HTML5** - Semantic markup and structure
+- **CSS3** - Modern styling with flexbox and grid layouts  
+- **Vanilla JavaScript** - No frameworks, lightweight and fast
+- **GitHub API** - Integration with GitHub Discussions API
+- **GitHub Pages** - Static site hosting
 
-## 🎯 Example Enhancement
+## 📦 Project Structure
 
-Original markdown becomes:
-```markdown
-🎯 Challenge: Build an AI-Powered Code Reviewer
+```
+├── index.html              # Main landing page
+├── deploy.js              # Deployment automation script
+├── aibuilders-discussions-results.json  # Discussion data cache
+└── create-aibuilders-discussions.js     # Discussion creation tool
+```
 
-[Original content...]
+## 🚀 Deployment
+
+The site is automatically deployed to GitHub Pages. To redeploy:
+
+```bash
+# Run the deployment script
+node deploy.js
+
+# Or manually push changes
+git add .
+git commit -m "Update landing page"
+git push origin master
+```
+
+## 🔧 Local Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rsham004/aibuilders-landing.git
+   cd aibuilders-landing
+   ```
+
+2. Open `index.html` in your browser or serve with a local server:
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx http-server
+   ```
+
+3. Visit `http://localhost:8000`
+
+## 📊 Data Sources
+
+- **Discussion Feed**: Loads from `aibuilders-discussions-results.json`
+- **Recent Activity**: Fetches live data from GitHub Discussions API
+- **Statistics**: Calculated dynamically from discussion data
+
+## 🤝 Contributing
+
+This landing page is part of the AI Builders Community project. To contribute:
+
+1. Fork this repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📞 Related Projects
+
+- **[AI Builders Community](https://github.com/AI-Product-Development/aibuilders)** - Main community repository
+- **[Community Wiki](https://github.com/AI-Product-Development/wiki)** - Challenge and resource documentation
+
+## 📄 License
+
+MIT License - see the main [AI Builders Community](https://github.com/AI-Product-Development/aibuilders) for details.
 
 ---
 
-## 🤝 How to Participate
-1. 💬 Comment below with your approach or questions
-2. 🔗 Share your progress - link to your repo, demo, or writeup
-3. 🏷️ Tag others who might be interested in collaborating
-4. ⭐ Star this discussion to follow updates
-
-## 📚 Resources
-- 📖 Source Wiki: AI-Product-Development/wiki/challenges
-- 🏠 Community Home: AI Builders
-- 💡 More Challenges: Browse other discussions in this category
-```
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-1. **GitHub CLI not authenticated**:
-   ```bash
-   gh auth status
-   gh auth login
-   ```
-
-2. **Permission denied**:
-   - Ensure you have write access to the aibuilders repository
-
-3. **Node.js not found**:
-   - Install Node.js from [nodejs.org](https://nodejs.org/)
-
-4. **Bash script won't run**:
-   - Use Git Bash, WSL, or the Node.js version instead
-
-### Windows-Specific Notes
-
-- The Node.js script (`create-aibuilders-discussions.js`) works best on Windows
-- The bash script requires WSL, Git Bash, or similar Unix environment
-- Use the batch helper file for one-click execution
-
-## 🤝 Support
-
-If you encounter issues:
-1. Check the prerequisites are installed
-2. Verify GitHub CLI authentication
-3. Ensure repository permissions
-4. Check the generated log files for detailed error messages
-
-## 📈 Next Steps After Running
-
-1. Visit [AI Builders Discussions](https://github.com/AI-Product-Development/aibuilders/discussions)
-2. Pin important challenges
-3. Engage with the community!
-4. Monitor the `created-discussions.txt` file for all URLs
-
-Happy building! 🚀
+*Built with ❤️ for the AI Builders Community*
