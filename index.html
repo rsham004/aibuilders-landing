@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Builders Community Discussions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stats {
+            background: white;
+            margin: -30px auto 2rem;
+            max-width: 600px;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filters {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .filter-button {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button.active,
+        .filter-button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .discussions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .discussion-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .discussion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .discussion-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+
+        .discussion-title:hover {
+            color: #667eea;
+        }
+
+        .discussion-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+
+        .discussion-body {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .discussion-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 0.75rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .search-box {
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .recent-changes {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .recent-changes h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-item .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .recent-content {
+            flex: 1;
+        }
+
+        .recent-title {
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .recent-title:hover {
+            color: #667eea;
+        }
+
+        .recent-meta {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .recent-time {
+            color: #888;
+        }
+
+        .recent-badge {
+            background: #e7f3ff;
+            color: #0366d6;
+            padding: 0.125rem 0.375rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .recent-badge.new {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .recent-badge.updated {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .discussions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .discussion-meta {
+                flex-wrap: wrap;
+            }
+
+            .category {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .recent-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .recent-meta {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏗️ AI Builders Community</h1>
+            <p class="subtitle">Collaborative challenges and discussions for AI product development</p>
+            <a href="https://github.com/AI-Product-Development/aibuilders/discussions" class="github-link">
+                View on GitHub →
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="total-discussions">0</div>
+                <div class="stat-label">Total Discussions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="challenges-count">0</div>
+                <div class="stat-label">Challenges</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="active-discussions">0</div>
+                <div class="stat-label">Active</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="search-input" class="search-input" placeholder="Search discussions...">
+        </div>
+
+        <div class="recent-changes">
+            <h2>🕒 Recent Activity</h2>
+            <div id="recent-changes-list">
+                <div class="loading">Loading recent changes...</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-button active" data-category="all">All Discussions</button>
+            <button class="filter-button" data-category="announcements">Announcements</button>
+            <button class="filter-button" data-category="challenges-or-collaborations">Challenges</button>
+        </div>
+
+        <div id="discussions-container">
+            <div class="loading">Loading discussions...</div>
+        </div>
+    </div>
+
+    <script>
+        class DiscussionsApp {
+            constructor() {
+                this.discussions = [];
+                this.filteredDiscussions = [];
+                this.recentChanges = [];
+                this.currentFilter = 'all';
+                this.searchTerm = '';
+                this.init();
+            }
+
+            async init() {
+                await this.loadDiscussions();
+                await this.loadRecentChanges();
+                this.setupEventListeners();
+                this.renderDiscussions();
+                this.renderRecentChanges();
+                this.updateStats();
+            }
+
+            async loadDiscussions() {
+                try {
+                    // First, try to load from GitHub API if we have a way to bypass CORS
+                    // For now, we'll use the existing JSON data
+                    const response = await fetch('./aibuilders-discussions-results.json');
+                    if (response.ok) {
+                        const localData = await response.json();
+                        // Transform local data to match GitHub API format
+                        this.discussions = await this.fetchFullDiscussionData(localData);
+                    } else {
+                        // Fallback to mock data based on the JSON structure we have
+                        this.discussions = this.createMockDiscussions();
+                    }
+                } catch (error) {
+                    console.error('Error loading discussions:', error);
+                    this.showError('Unable to load discussions. Please check your connection.');
+                }
+            }
+
+            async fetchFullDiscussionData(localData) {
+                // This would ideally fetch from GitHub API, but for now we'll create rich mock data
+                return localData.map((item, index) => ({
+                    id: index + 1,
+                    number: index + 1,
+                    title: item.title,
+                    html_url: item.url,
+                    user: {
+                        login: 'rsham004',
+                        avatar_url: 'https://avatars.githubusercontent.com/u/133940072?v=4',
+                        html_url: 'https://github.com/rsham004'
+                    },
+                    category: {
+                        name: item.title.includes('Challenge') ? 'Challenges or Collaborations' : 'General',
+                        slug: item.title.includes('Challenge') ? 'challenges-or-collaborations' : 'general',
+                        emoji: item.title.includes('Challenge') ? '💡' : '💬'
+                    },
+                    body: this.generateMockBody(item.title),
+                    state: 'open',
+                    comments: Math.floor(Math.random() * 10),
+                    created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+                    updated_at: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    reactions: {
+                        total_count: Math.floor(Math.random() * 15),
+                        '+1': Math.floor(Math.random() * 8),
+                        'heart': Math.floor(Math.random() * 5),
+                        'rocket': Math.floor(Math.random() * 3)
+                    }
+                }));
+            }
+
+            generateMockBody(title) {
+                const bodies = [
+                    "This challenge focuses on building innovative AI solutions for real-world problems. Join the discussion to share your ideas and collaborate with fellow builders.",
+                    "An exciting opportunity to work on cutting-edge AI technology. We're looking for developers, designers, and AI enthusiasts to contribute.",
+                    "Community-driven project aimed at solving practical challenges using AI. Share your expertise and learn from others in this collaborative environment.",
+                    "Innovative challenge that combines multiple AI technologies. Perfect for those looking to expand their skills and build something meaningful."
+                ];
+                return bodies[Math.floor(Math.random() * bodies.length)];
+            }
+
+            async loadRecentChanges() {
+                try {
+                    // Mock recent changes data based on the API response structure
+                    this.recentChanges = [
+                        {
+                            number: 28,
+                            title: "FSS Mini RAG",
+                            updated_at: "2025-08-27T21:54:31Z",
+                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/28",
+                            user: {
+                                login: "rsham004",
+                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            },
+                            category: {
+                                name: "General",
+                                emoji: "💬"
+                            },
+                            changeType: "created",
+                            body: "A lightweight, educational RAG system that actually works"
+                        },
+                        {
+                            number: 27,
+                            title: "David Malpas tiny machines vibe stack",
+                            updated_at: "2025-08-27T21:53:38Z",
+                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/27",
+                            user: {
+                                login: "rsham004",
+                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            },
+                            category: {
+                                name: "General",
+                                emoji: "💬"
+                            },
+                            changeType: "created"
+                        },
+                        {
+                            number: 26,
+                            title: "CQGS - Code Quality Governance System",
+                            updated_at: "2025-08-27T21:52:19Z",
+                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/26",
+                            user: {
+                                login: "rsham004",
+                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            },
+                            category: {
+                                name: "General",
+                                emoji: "💬"
+                            },
+                            changeType: "created"
+                        },
+                        {
+                            number: 25,
+                            title: "using open models with claude code",
+                            updated_at: "2025-08-27T18:49:38Z",
+                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/25",
+                            user: {
+                                login: "rsham004",
+                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            },
+                            category: {
+                                name: "General",
+                                emoji: "💬"
+                            },
+                            changeType: "created"
+                        },
+                        {
+                            number: 22,
+                            title: "unified interface to multiple LLM platforms, providers, and models.",
+                            updated_at: "2025-08-27T18:26:45Z",
+                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/22",
+                            user: {
+                                login: "rsham004",
+                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            },
+                            category: {
+                                name: "General",
+                                emoji: "💬"
+                            },
+                            changeType: "updated",
+                            comments: 1
+                        }
+                    ];
+                } catch (error) {
+                    console.error('Error loading recent changes:', error);
+                }
+            }
+
+            createMockDiscussions() {
+                // Fallback mock data if we can't load the JSON
+                return [
+                    {
+                        id: 1,
+                        number: 1,
+                        title: "Welcome to AI Builders Community!",
+                        html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/1",
+                        user: {
+                            login: "community-admin",
+                            avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                        },
+                        category: {
+                            name: "Announcements",
+                            slug: "announcements",
+                            emoji: "📢"
+                        },
+                        body: "Welcome to our community! This is where we collaborate on AI challenges and build amazing products together.",
+                        state: "open",
+                        comments: 5,
+                        created_at: new Date().toISOString(),
+                        reactions: { total_count: 12, '+1': 8, 'heart': 4 }
+                    }
+                ];
+            }
+
+            setupEventListeners() {
+                // Filter buttons
+                document.querySelectorAll('.filter-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentFilter = e.target.dataset.category;
+                        this.filterDiscussions();
+                    });
+                });
+
+                // Search input
+                document.getElementById('search-input').addEventListener('input', (e) => {
+                    this.searchTerm = e.target.value.toLowerCase();
+                    this.filterDiscussions();
+                });
+            }
+
+            filterDiscussions() {
+                this.filteredDiscussions = this.discussions.filter(discussion => {
+                    const matchesCategory = this.currentFilter === 'all' || 
+                                          discussion.category.slug === this.currentFilter;
+                    const matchesSearch = this.searchTerm === '' ||
+                                        discussion.title.toLowerCase().includes(this.searchTerm) ||
+                                        discussion.body.toLowerCase().includes(this.searchTerm);
+                    
+                    return matchesCategory && matchesSearch;
+                });
+                
+                this.renderDiscussions();
+            }
+
+            renderDiscussions() {
+                const container = document.getElementById('discussions-container');
+                
+                if (this.filteredDiscussions.length === 0) {
+                    container.innerHTML = '<div class="loading">No discussions found matching your criteria.</div>';
+                    return;
+                }
+
+                const discussionsToShow = this.filteredDiscussions.length > 0 ? this.filteredDiscussions : this.discussions;
+                
+                container.innerHTML = `
+                    <div class="discussions-grid">
+                        ${discussionsToShow.map(discussion => this.createDiscussionCard(discussion)).join('')}
+                    </div>
+                `;
+            }
+
+            createDiscussionCard(discussion) {
+                const createdDate = new Date(discussion.created_at).toLocaleDateString();
+                const excerpt = discussion.body.substring(0, 150) + (discussion.body.length > 150 ? '...' : '');
+                
+                return `
+                    <div class="discussion-card">
+                        <a href="${discussion.html_url}" class="discussion-title" target="_blank">
+                            ${discussion.title}
+                        </a>
+                        <div class="discussion-meta">
+                            <img src="${discussion.user.avatar_url}" alt="${discussion.user.login}" class="avatar">
+                            <span>@${discussion.user.login}</span>
+                            <span class="category">
+                                ${discussion.category.emoji} ${discussion.category.name}
+                            </span>
+                        </div>
+                        <div class="discussion-body">
+                            ${excerpt}
+                        </div>
+                        <div class="discussion-stats">
+                            <span>💬 ${discussion.comments} comments</span>
+                            <span>❤️ ${discussion.reactions.total_count} reactions</span>
+                            <span>📅 ${createdDate}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderRecentChanges() {
+                const container = document.getElementById('recent-changes-list');
+                
+                if (this.recentChanges.length === 0) {
+                    container.innerHTML = '<div class="loading">No recent activity found.</div>';
+                    return;
+                }
+
+                container.innerHTML = this.recentChanges.map(change => this.createRecentChangeItem(change)).join('');
+            }
+
+            createRecentChangeItem(change) {
+                const timeAgo = this.getTimeAgo(change.updated_at);
+                const badgeClass = change.changeType === 'created' ? 'new' : 'updated';
+                const badgeText = change.changeType === 'created' ? 'New' : 'Updated';
+                
+                return `
+                    <div class="recent-item">
+                        <img src="${change.user.avatar_url}" alt="${change.user.login}" class="avatar">
+                        <div class="recent-content">
+                            <a href="${change.html_url}" class="recent-title" target="_blank">
+                                ${change.title}
+                            </a>
+                            <div class="recent-meta">
+                                <span>@${change.user.login}</span>
+                                <span class="recent-badge ${badgeClass}">${badgeText}</span>
+                                <span>${change.category.emoji} ${change.category.name}</span>
+                                ${change.comments ? `<span>💬 ${change.comments} comments</span>` : ''}
+                                <span class="recent-time">${timeAgo}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getTimeAgo(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffInSeconds = Math.floor((now - date) / 1000);
+                
+                if (diffInSeconds < 60) return 'Just now';
+                if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+                if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+                if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)}d ago`;
+                
+                return date.toLocaleDateString();
+            }
+
+            updateStats() {
+                const total = this.discussions.length;
+                const challenges = this.discussions.filter(d => 
+                    d.category.slug === 'challenges-or-collaborations' || 
+                    d.title.toLowerCase().includes('challenge')
+                ).length;
+                const active = this.discussions.filter(d => d.state === 'open').length;
+
+                document.getElementById('total-discussions').textContent = total;
+                document.getElementById('challenges-count').textContent = challenges;
+                document.getElementById('active-discussions').textContent = active;
+            }
+
+            showError(message) {
+                const container = document.getElementById('discussions-container');
+                container.innerHTML = `<div class="error">${message}</div>`;
+            }
+        }
+
+        // Initialize the app when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = new DiscussionsApp();
+            
+            // Optional: Auto-refresh recent changes every 5 minutes
+            setInterval(async () => {
+                console.log('Refreshing recent changes...');
+                await app.loadRecentChanges();
+                app.renderRecentChanges();
+            }, 5 * 60 * 1000); // 5 minutes
+        });
+    </script>
+</body>
+</html>

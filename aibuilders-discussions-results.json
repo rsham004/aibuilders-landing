@@ -1,0 +1,92 @@
+[
+  {
+    "file": "001_Learning_Article_Generation.md",
+    "title": "🎯 Challenge: ✅ Challenge 001: Markdown detailed article generation from audio transcript [COMPLETED]",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/3",
+    "success": true
+  },
+  {
+    "file": "002_Wiki_GitHub_Integration.md",
+    "title": "🎯 Challenge: 📚 Challenge 002: Wiki.js / HedgeDocs / GitHub Integration",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/4",
+    "success": true
+  },
+  {
+    "file": "003_Ruvnet_Presentation.md",
+    "title": "🎯 Challenge: 📚 Challenge 003: Ruvnet Presentation",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/5",
+    "success": true
+  },
+  {
+    "file": "004_Automating_Onboarding.md",
+    "title": "🎯 Challenge: 📚 Challenge 004: Automating Onboarding",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/6",
+    "success": true
+  },
+  {
+    "file": "005_Lowcoder_Builderbase.md",
+    "title": "🎯 Challenge: 📚 Challenge 005: Lowcoder, Builderbase",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/7",
+    "success": true
+  },
+  {
+    "file": "006_Automating_Documentation.md",
+    "title": "🎯 Challenge: 📚 Challenge 006: Automating Documentation",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/8",
+    "success": true
+  },
+  {
+    "file": "007_Plugin_Development_Cursor_MCP.md",
+    "title": "🎯 Challenge: 🧪 Challenge 007: Plugin Development using Cursor/MCP",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/9",
+    "success": true
+  },
+  {
+    "file": "008_GenAI_Agents_Minecraft_Integration.md",
+    "title": "🎯 Challenge: 🧪 Challenge 008: Connecting GenAI Agents (voice-to-voice) into Minecraft using plugins/automated command sets",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/10",
+    "success": true
+  },
+  {
+    "file": "009_PlantUML.md",
+    "title": "🎯 Challenge: 🧪 Challenge 009: PlantUML",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/11",
+    "success": true
+  },
+  {
+    "file": "010_Contribution_Tracker.md",
+    "title": "🎯 Challenge: 🧪 Challenge 010: Contribution Tracker",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/12",
+    "success": true
+  },
+  {
+    "file": "011_Voice_Interface.md",
+    "title": "Challenge 011: Voice Interface",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/13",
+    "success": true
+  },
+  {
+    "file": "012_Voice_Social_Media_N8N.md",
+    "title": "🎯 Challenge: 🧪 Challenge 012: Voice to social media post generation using N8N",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/14",
+    "success": true
+  },
+  {
+    "file": "013_N8N_Xero_Slack_Integration.md",
+    "title": "Challenge 013: N8N integration with Xero, Slack",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/15",
+    "success": true
+  },
+  {
+    "file": "014_Te_Ao_AI_website.md",
+    "title": "Challenge 014: website for Te Ao AI",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/16",
+    "success": true
+  },
+  {
+    "file": "015_CommunityPortal.md",
+    "title": "🎯 Challenge: AI-Integrated Community Portal: PRD + Solution Architecture",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/17",
+    "success": true
+  }
+]

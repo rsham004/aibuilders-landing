@@ -1,0 +1,27 @@
+{
+  "name": "ai-builders-discussion-creator",
+  "version": "1.0.0",
+  "description": "Creates GitHub Discussion threads in AI Builders community from wiki challenges",
+  "main": "create-aibuilders-discussions.js",
+  "scripts": {
+    "start": "node create-aibuilders-discussions.js",
+    "create-discussions": "node create-aibuilders-discussions.js"
+  },
+  "keywords": [
+    "github",
+    "discussions",
+    "automation",
+    "ai-builders",
+    "community"
+  ],
+  "author": "AI Builders Community",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ]
+}
