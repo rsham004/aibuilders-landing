@@ -381,7 +381,7 @@
 
         .search-input {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem 3rem 0.75rem 1rem;
             border: 2px solid #ddd;
             border-radius: 25px;
             font-size: 1rem;
@@ -391,6 +391,29 @@
 
         .search-input:focus {
             border-color: #667eea;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-icon:hover {
+            background: #5a67d8;
         }
 
         .recent-changes {
@@ -1212,6 +1235,7 @@
 
         <div class="search-box">
             <input type="text" id="search-input" class="search-input" placeholder="Search AI discussions and challenges...">
+            <button type="button" id="search-button" class="search-icon" title="Search">🔍</button>
         </div>
 
         <div class="recent-changes">
@@ -1544,10 +1568,27 @@
                     });
                 });
 
-                // Search input
+                // Search input - real-time search as user types
                 document.getElementById('search-input').addEventListener('input', (e) => {
                     this.searchTerm = e.target.value.toLowerCase();
                     this.filterDiscussions();
+                });
+
+                // Search input - Enter key support
+                document.getElementById('search-input').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.searchTerm = e.target.value.toLowerCase();
+                        this.filterDiscussions();
+                    }
+                });
+
+                // Search button click
+                document.getElementById('search-button').addEventListener('click', () => {
+                    const searchInput = document.getElementById('search-input');
+                    this.searchTerm = searchInput.value.toLowerCase();
+                    this.filterDiscussions();
+                    searchInput.focus();
                 });
             }
 
@@ -1557,7 +1598,7 @@
                                           discussion.category.slug === this.currentFilter;
                     const matchesSearch = this.searchTerm === '' ||
                                         discussion.title.toLowerCase().includes(this.searchTerm) ||
-                                        discussion.body.toLowerCase().includes(this.searchTerm);
+                                        (discussion.body && discussion.body.toLowerCase().includes(this.searchTerm));
                     
                     return matchesCategory && matchesSearch;
                 });
