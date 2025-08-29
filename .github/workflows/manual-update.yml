@@ -29,9 +29,9 @@ jobs:
         node-version: '18'
 
     - name: Setup GitHub CLI
-      uses: cli/gh-installation-action@v1
-      with:
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # GitHub CLI is pre-installed on GitHub runners
+        gh --version
 
     - name: Configure Git
       run: |
