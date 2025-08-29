@@ -1408,27 +1408,27 @@
             }
 
             async fetchFullDiscussionData(localData) {
-                // This would ideally fetch from GitHub API, but for now we'll create rich mock data
+                // Transform the actual JSON data to match the expected format
                 return localData.map((item, index) => ({
-                    id: index + 1,
-                    number: index + 1,
+                    id: item.number,
+                    number: item.number,
                     title: item.title,
                     html_url: item.url,
                     user: {
-                        login: 'rsham004',
+                        login: item.user,
                         avatar_url: 'https://avatars.githubusercontent.com/u/133940072?v=4',
-                        html_url: 'https://github.com/rsham004'
+                        html_url: `https://github.com/${item.user}`
                     },
                     category: {
-                        name: item.title.includes('Challenge') ? 'Challenges or Collaborations' : 'General',
-                        slug: item.title.includes('Challenge') ? 'challenges-or-collaborations' : 'general',
-                        emoji: item.title.includes('Challenge') ? '💡' : '💬'
+                        name: item.category,
+                        slug: this.getCategorySlug(item.category),
+                        emoji: this.getCategoryEmoji(item.category)
                     },
-                    body: this.generateMockBody(item.title),
+                    body: item.body || this.generateMockBody(item.title),
                     state: 'open',
-                    comments: Math.floor(Math.random() * 10),
-                    created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-                    updated_at: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    comments: item.comments || 0,
+                    created_at: item.created_at,
+                    updated_at: item.updated_at,
                     reactions: {
                         total_count: Math.floor(Math.random() * 15),
                         '+1': Math.floor(Math.random() * 8),
@@ -1459,14 +1459,14 @@
                         number: discussion.number,
                         title: discussion.title,
                         updated_at: discussion.updated_at,
-                        html_url: discussion.url,
+                        html_url: discussion.html_url,
                         user: {
-                            login: discussion.user,
-                            avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
+                            login: discussion.user.login,
+                            avatar_url: discussion.user.avatar_url
                         },
                         category: {
-                            name: discussion.category,
-                            emoji: this.getCategoryEmoji(discussion.category)
+                            name: discussion.category.name,
+                            emoji: discussion.category.emoji
                         },
                         changeType: this.getChangeType(discussion.created_at, discussion.updated_at),
                         comments: discussion.comments
@@ -1485,6 +1485,17 @@
                     'n8n': '🔄'
                 };
                 return emojiMap[categoryName] || '💬';
+            }
+
+            getCategorySlug(categoryName) {
+                const slugMap = {
+                    'Announcements': 'announcements',
+                    'Challenges & Collaborations': 'challenges-or-collaborations',
+                    'General': 'general',
+                    'Document your best practices & learnings': 'document-your-best-practices-learnings',
+                    'n8n': 'n8n'
+                };
+                return slugMap[categoryName] || 'general';
             }
 
             getChangeType(createdAt, updatedAt) {
