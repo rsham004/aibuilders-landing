@@ -404,11 +404,12 @@
 
             async init() {
                 await this.loadDiscussions();
-                await this.loadRecentChanges();
                 this.setupEventListeners();
                 this.renderDiscussions();
-                this.renderRecentChanges();
                 this.updateStats();
+                // Load recent changes after discussions data is available
+                this.loadRecentChanges();
+                this.renderRecentChanges();
             }
 
             async loadDiscussions() {
@@ -473,89 +474,50 @@
 
             async loadRecentChanges() {
                 try {
-                    // Mock recent changes data based on the API response structure
-                    this.recentChanges = [
-                        {
-                            number: 28,
-                            title: "FSS Mini RAG",
-                            updated_at: "2025-08-27T21:54:31Z",
-                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/28",
-                            user: {
-                                login: "rsham004",
-                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
-                            },
-                            category: {
-                                name: "General",
-                                emoji: "💬"
-                            },
-                            changeType: "created",
-                            body: "A lightweight, educational RAG system that actually works"
+                    // Use the actual discussions data and sort by most recently updated
+                    const sortedDiscussions = [...this.discussions]
+                        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                        .slice(0, 10); // Show top 10 most recent
+                    
+                    this.recentChanges = sortedDiscussions.map(discussion => ({
+                        number: discussion.number,
+                        title: discussion.title,
+                        updated_at: discussion.updated_at,
+                        html_url: discussion.url,
+                        user: {
+                            login: discussion.user,
+                            avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
                         },
-                        {
-                            number: 27,
-                            title: "David Malpas tiny machines vibe stack",
-                            updated_at: "2025-08-27T21:53:38Z",
-                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/27",
-                            user: {
-                                login: "rsham004",
-                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
-                            },
-                            category: {
-                                name: "General",
-                                emoji: "💬"
-                            },
-                            changeType: "created"
+                        category: {
+                            name: discussion.category,
+                            emoji: this.getCategoryEmoji(discussion.category)
                         },
-                        {
-                            number: 26,
-                            title: "CQGS - Code Quality Governance System",
-                            updated_at: "2025-08-27T21:52:19Z",
-                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/26",
-                            user: {
-                                login: "rsham004",
-                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
-                            },
-                            category: {
-                                name: "General",
-                                emoji: "💬"
-                            },
-                            changeType: "created"
-                        },
-                        {
-                            number: 25,
-                            title: "using open models with claude code",
-                            updated_at: "2025-08-27T18:49:38Z",
-                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/25",
-                            user: {
-                                login: "rsham004",
-                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
-                            },
-                            category: {
-                                name: "General",
-                                emoji: "💬"
-                            },
-                            changeType: "created"
-                        },
-                        {
-                            number: 22,
-                            title: "unified interface to multiple LLM platforms, providers, and models.",
-                            updated_at: "2025-08-27T18:26:45Z",
-                            html_url: "https://github.com/AI-Product-Development/aibuilders/discussions/22",
-                            user: {
-                                login: "rsham004",
-                                avatar_url: "https://avatars.githubusercontent.com/u/133940072?v=4"
-                            },
-                            category: {
-                                name: "General",
-                                emoji: "💬"
-                            },
-                            changeType: "updated",
-                            comments: 1
-                        }
-                    ];
+                        changeType: this.getChangeType(discussion.created_at, discussion.updated_at),
+                        comments: discussion.comments
+                    }));
                 } catch (error) {
                     console.error('Error loading recent changes:', error);
                 }
+            }
+
+            getCategoryEmoji(categoryName) {
+                const emojiMap = {
+                    'Announcements': '📢',
+                    'Challenges & Collaborations': '💡',
+                    'General': '💬',
+                    'Document your best practices & learnings': '📚',
+                    'n8n': '🔄'
+                };
+                return emojiMap[categoryName] || '💬';
+            }
+
+            getChangeType(createdAt, updatedAt) {
+                const created = new Date(createdAt);
+                const updated = new Date(updatedAt);
+                const diff = updated - created;
+                
+                // If updated within 1 minute of creation, consider it "created"
+                return diff < 60000 ? 'created' : 'updated';
             }
 
             createMockDiscussions() {
@@ -736,7 +698,7 @@
             setInterval(async () => {
                 console.log('Refreshing data...');
                 await app.loadDiscussions();
-                await app.loadRecentChanges();
+                app.loadRecentChanges(); // Load recent changes after discussions
                 app.renderDiscussions();
                 app.renderRecentChanges();
                 app.updateStats();
