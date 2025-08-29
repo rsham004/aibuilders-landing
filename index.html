@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>AI Builders Community Discussions</title>
+    <!-- Last updated: 2025-08-29T00:00:00Z -->
     <style>
         * {
             margin: 0;
@@ -409,9 +413,9 @@
 
             async loadDiscussions() {
                 try {
-                    // First, try to load from GitHub API if we have a way to bypass CORS
-                    // For now, we'll use the existing JSON data
-                    const response = await fetch('./aibuilders-discussions-results.json');
+                    // Add cache-busting parameter to prevent stale data
+                    const cacheBuster = `?t=${Date.now()}`;
+                    const response = await fetch(`./aibuilders-discussions-results.json${cacheBuster}`);
                     if (response.ok) {
                         const localData = await response.json();
                         // Transform local data to match GitHub API format
@@ -728,11 +732,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const app = new DiscussionsApp();
             
-            // Optional: Auto-refresh recent changes every 5 minutes
+            // Auto-refresh all data every 5 minutes
             setInterval(async () => {
-                console.log('Refreshing recent changes...');
+                console.log('Refreshing data...');
+                await app.loadDiscussions();
                 await app.loadRecentChanges();
+                app.renderDiscussions();
                 app.renderRecentChanges();
+                app.updateStats();
             }, 5 * 60 * 1000); // 5 minutes
         });
     </script>

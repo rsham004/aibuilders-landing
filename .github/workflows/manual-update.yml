@@ -1,0 +1,60 @@
+name: Manual Update Discussions
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no new discussions'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  manual-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Setup GitHub CLI
+      uses: cli/gh-installation-action@v1
+      with:
+        gh-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Configure Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+    - name: Run discussion creation script
+      run: |
+        node create-aibuilders-discussions.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Update timestamp
+      run: |
+        TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        sed -i "s|<!-- Last updated: .* -->|<!-- Last updated: $TIMESTAMP -->|" index.html
+
+    - name: Commit and push changes
+      run: |
+        git add .
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🚀 Manual update discussions - $(date -u +"%Y-%m-%d %H:%M UTC")"
+          git push
+        fi
