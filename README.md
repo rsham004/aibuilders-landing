@@ -12,7 +12,7 @@ A modern, responsive landing page for the [AI Builders Community GitHub Discussi
 - **🕒 Recent Activity** - Shows the latest discussion updates and new posts
 - **🔍 Search & Filter** - Find discussions by title, content, or category
 - **📱 Responsive Design** - Works perfectly on desktop and mobile devices
-- **⚡ Real-time Updates** - Auto-refreshes recent changes every 5 minutes
+- **⚡ Auto-Updates** - GitHub Actions fetch new discussions every 30 minutes
 - **🎨 Modern UI** - Clean, GitHub-style interface with smooth animations
 
 ## 🏗️ Built With
@@ -27,23 +27,24 @@ A modern, responsive landing page for the [AI Builders Community GitHub Discussi
 
 ```
 ├── index.html              # Main landing page
-├── deploy.js              # Deployment automation script
+├── fetch-discussions.js   # Fetches discussion data from GitHub
 ├── aibuilders-discussions-results.json  # Discussion data cache
-└── create-aibuilders-discussions.js     # Discussion creation tool
+└── .github/workflows/      # GitHub Actions for auto-updates
 ```
 
-## 🚀 Deployment
+## 🚀 Auto-Updates
 
-The site is automatically deployed to GitHub Pages. To redeploy:
+The site automatically updates via GitHub Actions:
+
+- **Scheduled**: Runs every 30 minutes to fetch new discussions
+- **Manual**: Trigger updates on-demand via GitHub Actions
 
 ```bash
-# Run the deployment script
-node deploy.js
+# Manually trigger an update
+gh workflow run manual-update.yml --repo rsham004/aibuilders-landing
 
-# Or manually push changes
-git add .
-git commit -m "Update landing page"
-git push origin master
+# Check workflow status
+gh run list --repo rsham004/aibuilders-landing
 ```
 
 ## 🔧 Local Development
@@ -68,8 +69,9 @@ git push origin master
 ## 📊 Data Sources
 
 - **Discussion Feed**: Loads from `aibuilders-discussions-results.json`
-- **Recent Activity**: Fetches live data from GitHub Discussions API
+- **Auto-Refresh**: GitHub Actions update data every 30 minutes
 - **Statistics**: Calculated dynamically from discussion data
+- **Cache-Busting**: Multiple mechanisms prevent stale content
 
 ## 🤝 Contributing
 

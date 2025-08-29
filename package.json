@@ -1,18 +1,20 @@
 {
-  "name": "ai-builders-discussion-creator",
-  "version": "1.0.0",
-  "description": "Creates GitHub Discussion threads in AI Builders community from wiki challenges",
-  "main": "create-aibuilders-discussions.js",
+  "name": "aibuilders-landing-page",
+  "version": "2.0.0",
+  "description": "Landing page for AI Builders community with auto-updating discussions",
+  "main": "fetch-discussions.js",
   "scripts": {
-    "start": "node create-aibuilders-discussions.js",
-    "create-discussions": "node create-aibuilders-discussions.js"
+    "start": "node fetch-discussions.js",
+    "fetch": "node fetch-discussions.js",
+    "serve": "python -m http.server 8000"
   },
   "keywords": [
     "github",
     "discussions",
-    "automation",
+    "landing-page",
     "ai-builders",
-    "community"
+    "community",
+    "github-actions"
   ],
   "author": "AI Builders Community",
   "license": "MIT",

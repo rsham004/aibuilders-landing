@@ -2,26 +2,18 @@ name: Manual Update Discussions
 
 on:
   workflow_dispatch:
-    inputs:
-      force_update:
-        description: 'Force update even if no new discussions'
-        required: false
-        default: false
-        type: boolean
 
 jobs:
-  manual-update:
+  fetch-discussions:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      id-token: write
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -38,11 +30,11 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-    - name: Run discussion creation script
+    - name: Fetch discussions data
       run: |
-        node create-aibuilders-discussions.js
+        node fetch-discussions.js
       env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Update timestamp
       run: |
@@ -55,6 +47,6 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "🚀 Manual update discussions - $(date -u +"%Y-%m-%d %H:%M UTC")"
+          git commit -m "🔄 Update discussions data - $(date -u +"%Y-%m-%d %H:%M UTC")"
           git push
         fi
