@@ -6,7 +6,66 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>AI Builders Community Discussions</title>
+    <title>AI Learning Pathway | AI Builders Community | Product Foundry</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Join the AI Builders Community for hands-on AI learning pathways, collaborative challenges, and real-world AI product development. Connect with AI enthusiasts and build the future together.">
+    <meta name="keywords" content="AI learning pathway, AI education, artificial intelligence course, AI builders, AI community, machine learning tutorial, AI product development, AI collaboration, Claude Code, Product Foundry, ProductFoundryAI YouTube, AI specialized circles, AI learning journey">
+    <meta name="author" content="Product Foundry - www.productfoundry.ai">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI Learning Pathway | AI Builders Community">
+    <meta property="og:description" content="Join our AI Builders Community for structured learning pathways, collaborative challenges, and hands-on AI product development experience.">
+    <meta property="og:image" content="https://rsham004.github.io/aibuilders-landing/og-image.jpg">
+    <meta property="og:url" content="https://rsham004.github.io/aibuilders-landing/">
+    <meta property="og:site_name" content="AI Builders Community">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="AI Learning Pathway | AI Builders Community">
+    <meta property="twitter:description" content="Join our AI Builders Community for structured learning pathways, collaborative challenges, and hands-on AI product development experience.">
+    <meta property="twitter:image" content="https://rsham004.github.io/aibuilders-landing/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rsham004.github.io/aibuilders-landing/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "AI Builders Community",
+        "description": "A collaborative community for AI learning pathways and product development",
+        "url": "https://rsham004.github.io/aibuilders-landing/",
+        "sameAs": [
+            "https://github.com/AI-Product-Development/aibuilders",
+            "https://www.productfoundry.ai",
+            "https://www.youtube.com/@ProductFoundryAI"
+        ],
+        "offers": {
+            "@type": "Course",
+            "name": "AI Learning Pathway",
+            "description": "Hands-on AI learning through collaborative challenges and real-world projects",
+            "provider": {
+                "@type": "Organization",
+                "name": "Product Foundry",
+                "url": "https://www.productfoundry.ai"
+            }
+        },
+        "creator": {
+            "@type": "SoftwareApplication",
+            "name": "Claude Code",
+            "url": "https://claude.ai/code",
+            "description": "This site was built using Claude Code, Anthropic's AI-powered development assistant"
+        }
+    }
+    </script>
+    
     <!-- Last updated: 2025-08-29T21:48:05Z -->
     <style>
         * {
@@ -47,7 +106,14 @@
             margin-bottom: 1rem;
         }
 
-        .github-link {
+        .header-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .github-link, .foundry-link, .youtube-link {
             display: inline-block;
             background: rgba(255, 255, 255, 0.2);
             padding: 0.5rem 1rem;
@@ -57,8 +123,33 @@
             transition: background 0.3s ease;
         }
 
-        .github-link:hover {
+        .github-link:hover, .foundry-link:hover, .youtube-link:hover {
             background: rgba(255, 255, 255, 0.3);
+        }
+
+        .foundry-link {
+            background: rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .foundry-link:hover {
+            background: rgba(255, 215, 0, 0.5);
+        }
+
+        .youtube-link {
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid rgba(255, 0, 0, 0.5);
+        }
+
+        .youtube-link:hover {
+            background: rgba(255, 0, 0, 0.5);
+        }
+
+        .learning-pathway-intro {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .stats {
@@ -307,6 +398,337 @@
             color: #92400e;
         }
 
+        .learning-pathway-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .learning-pathway-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .learning-pathway-section > p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .pathway-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .pathway-feature {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pathway-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .pathway-feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .pathway-feature p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .site-footer {
+            background: #2d3748;
+            color: white;
+            margin-top: 3rem;
+            padding: 2rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #4c51bf;
+        }
+
+        .claude-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .claude-link:hover {
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 1rem;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: #4c51bf;
+        }
+
+        .youtube-cta-section {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .youtube-cta-section h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .youtube-cta-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .youtube-subscribe-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .youtube-subscribe-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .specialized-circles-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .specialized-circles-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .specialized-circles-section > p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .circles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .circle-card {
+            background: white;
+            color: #333;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .circle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .circle-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .circle-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .circle-card > p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .circle-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .circle-features li {
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .circle-cta {
+            text-align: center;
+        }
+
+        .circle-join-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .circle-join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .circles-bottom-cta {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .circles-bottom-cta p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .bottom-cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .primary-cta-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .primary-cta-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .secondary-cta-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .secondary-cta-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -339,6 +761,57 @@
                 flex-wrap: wrap;
                 gap: 0.5rem;
             }
+
+            .header-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .learning-pathway-intro {
+                font-size: 0.9rem;
+            }
+
+            .learning-pathway-section {
+                padding: 1.5rem;
+            }
+
+            .pathway-features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .header-links {
+                flex-wrap: wrap;
+            }
+
+            .circles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .specialized-circles-section {
+                padding: 2rem 1rem;
+            }
+
+            .specialized-circles-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .bottom-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .primary-cta-btn, .secondary-cta-btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -346,10 +819,21 @@
     <header>
         <div class="container">
             <h1>🏗️ AI Builders Community</h1>
-            <p class="subtitle">Collaborative challenges and discussions for AI product development</p>
-            <a href="https://github.com/AI-Product-Development/aibuilders/discussions" class="github-link">
-                View on GitHub →
-            </a>
+            <p class="subtitle">Your pathway to mastering AI through collaborative challenges and real-world product development</p>
+            <div class="header-links">
+                <a href="https://github.com/AI-Product-Development/aibuilders/discussions" class="github-link">
+                    Join Community →
+                </a>
+                <a href="https://www.productfoundry.ai" class="foundry-link" target="_blank">
+                    Product Foundry →
+                </a>
+                <a href="https://www.youtube.com/@ProductFoundryAI" class="youtube-link" target="_blank">
+                    📺 Subscribe on YouTube →
+                </a>
+            </div>
+            <p class="learning-pathway-intro">
+                🎯 <strong>Structured AI Learning Pathway</strong> | 🤝 <strong>Collaborative Projects</strong> | 🚀 <strong>Real-world Applications</strong>
+            </p>
         </div>
     </header>
 
@@ -369,8 +853,97 @@
             </div>
         </div>
 
+        <div class="learning-pathway-section">
+            <h2>🎯 AI Learning Pathway</h2>
+            <p>Join our structured community-driven approach to mastering artificial intelligence through hands-on projects and collaborative challenges. Whether you're a beginner or experienced developer, our pathway adapts to your level.</p>
+            
+            <div class="youtube-cta-section">
+                <h3>📺 Watch & Learn on YouTube</h3>
+                <p>Subscribe to <strong>Product Foundry AI</strong> for exclusive tutorials, project walkthroughs, and expert insights that complement your learning journey.</p>
+                <a href="https://www.youtube.com/@ProductFoundryAI" class="youtube-subscribe-btn" target="_blank">
+                    🔔 Subscribe to Product Foundry AI
+                </a>
+            </div>
+
+            <div class="pathway-features">
+                <div class="pathway-feature">
+                    <span class="feature-icon">📚</span>
+                    <h3>Structured Learning</h3>
+                    <p>Follow our curated learning path with progressive challenges and real-world applications</p>
+                </div>
+                <div class="pathway-feature">
+                    <span class="feature-icon">🤝</span>
+                    <h3>Community Collaboration</h3>
+                    <p>Work with fellow AI builders on exciting projects and learn from shared experiences</p>
+                </div>
+                <div class="pathway-feature">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Product Development</h3>
+                    <p>Build real AI products that solve actual problems and add value to your portfolio</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="specialized-circles-section">
+            <h2>🎪 Join Our Specialized Circles</h2>
+            <p>Embark on your AI learning journey by joining our focused learning circles. Each circle is designed for specific skill levels and interests, providing personalized guidance and peer support.</p>
+            
+            <div class="circles-grid">
+                <div class="circle-card">
+                    <div class="circle-icon">🌱</div>
+                    <h3>AI Foundations Circle</h3>
+                    <p>Perfect for beginners! Learn the fundamentals of AI, machine learning basics, and get hands-on with your first AI projects.</p>
+                    <ul class="circle-features">
+                        <li>✅ Week-by-week structured curriculum</li>
+                        <li>✅ Beginner-friendly challenges</li>
+                        <li>✅ Mentor support & peer learning</li>
+                    </ul>
+                    <div class="circle-cta">
+                        <a href="https://www.productfoundry.ai" class="circle-join-btn" target="_blank">Join Foundation Circle</a>
+                    </div>
+                </div>
+
+                <div class="circle-card">
+                    <div class="circle-icon">⚡</div>
+                    <h3>AI Builders Circle</h3>
+                    <p>For intermediate learners ready to build real AI applications. Focus on practical implementation and product development.</p>
+                    <ul class="circle-features">
+                        <li>✅ Build 3+ AI applications</li>
+                        <li>✅ Portfolio development</li>
+                        <li>✅ Industry best practices</li>
+                    </ul>
+                    <div class="circle-cta">
+                        <a href="https://www.productfoundry.ai" class="circle-join-btn" target="_blank">Join Builders Circle</a>
+                    </div>
+                </div>
+
+                <div class="circle-card">
+                    <div class="circle-icon">🚀</div>
+                    <h3>AI Innovation Circle</h3>
+                    <p>Advanced circle for experienced developers looking to push boundaries and create cutting-edge AI solutions.</p>
+                    <ul class="circle-features">
+                        <li>✅ Advanced AI techniques</li>
+                        <li>✅ Research & development projects</li>
+                        <li>✅ Startup & entrepreneurship focus</li>
+                    </ul>
+                    <div class="circle-cta">
+                        <a href="https://www.productfoundry.ai" class="circle-join-btn" target="_blank">Join Innovation Circle</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="circles-bottom-cta">
+                <p><strong>Ready to start your AI learning journey?</strong></p>
+                <p>Choose the circle that matches your current level and begin building the future with AI!</p>
+                <div class="bottom-cta-buttons">
+                    <a href="https://www.productfoundry.ai" class="primary-cta-btn" target="_blank">🚀 Explore All Circles</a>
+                    <a href="https://www.youtube.com/@ProductFoundryAI" class="secondary-cta-btn" target="_blank">📺 Watch Tutorials First</a>
+                </div>
+            </div>
+        </div>
+
         <div class="search-box">
-            <input type="text" id="search-input" class="search-input" placeholder="Search discussions...">
+            <input type="text" id="search-input" class="search-input" placeholder="Search AI discussions and challenges...">
         </div>
 
         <div class="recent-changes">
@@ -390,6 +963,39 @@
             <div class="loading">Loading discussions...</div>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI Learning Community</h3>
+                    <p>Join the future of AI product development through collaborative learning and hands-on challenges.</p>
+                    <a href="https://www.productfoundry.ai" class="footer-link" target="_blank">
+                        🚀 Product Foundry - AI Innovation Hub
+                    </a>
+                </div>
+                <div class="footer-section">
+                    <h3>Built with AI</h3>
+                    <p>This site was crafted using <strong>Claude Code</strong>, Anthropic's AI-powered development assistant, showcasing the future of AI-assisted web development.</p>
+                    <a href="https://claude.ai/code" class="footer-link claude-link" target="_blank">
+                        🤖 Try Claude Code →
+                    </a>
+                </div>
+                <div class="footer-section">
+                    <h3>Get Started</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/AI-Product-Development/aibuilders/discussions" target="_blank">Join Discussions</a></li>
+                        <li><a href="https://www.productfoundry.ai" target="_blank">Product Foundry</a></li>
+                        <li><a href="https://www.youtube.com/@ProductFoundryAI" target="_blank">YouTube Channel</a></li>
+                        <li><a href="https://claude.ai/code" target="_blank">Claude Code</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Builders Community | Powered by <a href="https://www.productfoundry.ai" target="_blank">Product Foundry</a> | Built with <a href="https://claude.ai/code" target="_blank">Claude Code</a></p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         class DiscussionsApp {
