@@ -22,7 +22,7 @@ Some of our community discussions and resources are completely free! Customised 
 
 ## 6. How long does it take to master AI through this pathway?
 
-Your AI learning journey timeline depends on your starting point, goals, and time commitment. Most learners see significant progress in 3-6 months with our structured approach. Complete beginners often build their first AI application within 4-8 weeks, while career transitions to AI roles typically take 6-12 months of dedicated learning and collaborative AI projects. The primary goal for us is to accelerate your AI learning in a safe learning space free judgement and credentials. We value your prior experience and help you journey to your desired future.
+Your AI learning journey timeline depends on your starting point, goals, and time commitment. Most learners see significant progress in 3-6 months with our structured approach. Complete beginners often build their first AI application within 4-8 weeks, while career transitions to AI roles typically take 6-12 months of dedicated learning and collaborative AI projects. The primary goal for us is to accelerate your AI learning in a safe learning space free of judgement and credentials. We value your prior experience and help you journey to your desired future.
 
 ---
 
