@@ -609,8 +609,8 @@
 
         .circles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
             margin: 3rem 0;
         }
 
@@ -729,6 +729,13 @@
         .secondary-cta-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-3px);
+        }
+
+        @media (max-width: 1200px) and (min-width: 769px) {
+            .circles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 768px) {
