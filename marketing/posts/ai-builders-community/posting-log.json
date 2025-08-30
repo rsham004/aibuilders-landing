@@ -1,0 +1,38 @@
+{
+  "post_id": "ai-builders-community",
+  "created_date": "2025-08-30",
+  "total_posts": 2,
+  "last_posted": "2025-08-30T03:19:03Z",
+  "posting_history": [
+    {
+      "date": "2025-08-30T03:12:33Z",
+      "platform": "linkedin",
+      "post_id": "urn:li:share:7367393765759574016",
+      "status": "success",
+      "content_version": "v1.0",
+      "engagement": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null
+      },
+      "notes": "Initial automated post - successful"
+    },
+    {
+      "date": "2025-08-30T03:19:03Z",
+      "platform": "linkedin", 
+      "post_id": "urn:li:share:7367395402230190081",
+      "status": "success",
+      "content_version": "v1.1",
+      "engagement": {
+        "views": null,
+        "likes": null,
+        "comments": null,
+        "shares": null
+      },
+      "notes": "Updated with ProductFoundry AI Explorers link"
+    }
+  ],
+  "next_scheduled": null,
+  "config_version": "1.0"
+}

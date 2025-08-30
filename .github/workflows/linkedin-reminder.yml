@@ -48,12 +48,98 @@ jobs:
           POST_ID=$(echo "$RESPONSE" | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
           echo "Post ID: $POST_ID"
           
+          # Log the successful post
+          TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+          echo "$TIMESTAMP SUCCESS ai-builders-community linkedin Posted: $POST_ID - Weekly automated post" >> marketing/logs/activity.log
+          
+          # Update posting log JSON
+          python3 -c "
+import json
+import os
+from datetime import datetime
+
+log_file = 'marketing/posts/ai-builders-community/posting-log.json'
+if os.path.exists(log_file):
+    with open(log_file, 'r') as f:
+        log_data = json.load(f)
+else:
+    log_data = {'post_id': 'ai-builders-community', 'total_posts': 0, 'posting_history': []}
+
+# Add new entry
+new_entry = {
+    'date': '$TIMESTAMP',
+    'platform': 'linkedin',
+    'post_id': '$POST_ID',
+    'status': 'success',
+    'content_version': 'v2.0',
+    'engagement': {'views': None, 'likes': None, 'comments': None, 'shares': None},
+    'notes': 'Weekly automated post with ProductFoundry link'
+}
+
+log_data['posting_history'].append(new_entry)
+log_data['total_posts'] = len(log_data['posting_history'])
+log_data['last_posted'] = '$TIMESTAMP'
+
+with open(log_file, 'w') as f:
+    json.dump(log_data, f, indent=2)
+"
+          
+          # Commit the log updates
+          git add marketing/logs/activity.log marketing/posts/ai-builders-community/posting-log.json
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "LinkedIn Auto-poster"
+          git commit -m "📊 Log LinkedIn post: $POST_ID - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git push || echo "Push failed - continuing anyway"
+          
           # Create success issue for tracking  
           gh issue create \
             --title "✅ LinkedIn Post Created - $(date '+%Y-%m-%d')" \
             --body "LinkedIn post was automatically created on $(date).\n\n**Post ID:** $POST_ID\n\n**API Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`"
         else
           echo "❌ LinkedIn post failed!"
+          
+          # Log the failed post
+          TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+          echo "$TIMESTAMP ERROR ai-builders-community linkedin Failed: $(echo "$RESPONSE" | grep -o '"message":"[^"]*"' | cut -d'"' -f4)" >> marketing/logs/activity.log
+          echo "$TIMESTAMP ERROR ai-builders-community linkedin Response: $RESPONSE" >> marketing/logs/errors.log
+          
+          # Update posting log with failure
+          python3 -c "
+import json
+import os
+
+log_file = 'marketing/posts/ai-builders-community/posting-log.json'
+if os.path.exists(log_file):
+    with open(log_file, 'r') as f:
+        log_data = json.load(f)
+else:
+    log_data = {'post_id': 'ai-builders-community', 'total_posts': 0, 'posting_history': []}
+
+# Add failed entry
+new_entry = {
+    'date': '$TIMESTAMP',
+    'platform': 'linkedin',
+    'post_id': None,
+    'status': 'failed',
+    'content_version': 'v2.0',
+    'engagement': None,
+    'notes': 'Post failed - see error log',
+    'error': '$RESPONSE'
+}
+
+log_data['posting_history'].append(new_entry)
+log_data['total_posts'] = len(log_data['posting_history'])
+
+with open(log_file, 'w') as f:
+    json.dump(log_data, f, indent=2)
+"
+          
+          # Commit the error logs
+          git add marketing/logs/activity.log marketing/logs/errors.log marketing/posts/ai-builders-community/posting-log.json 2>/dev/null || true
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "LinkedIn Auto-poster"
+          git commit -m "🚨 Log LinkedIn post failure - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git push || echo "Push failed - continuing anyway"
           
           # Create failure issue for debugging
           gh issue create \
