@@ -23,4 +23,4 @@ Whether you're a complete beginner or looking to upskill, we meet you where you 
 
 ## Call to Action
 
-✨ Join us today!
+✨ Ready to start your AI journey? Join our AI Explorers program: https://productfoundry.ai/individuals-ai-explorers
