@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn OAuth - AI Builders Community</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0077b5;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0077b5;
+        }
+        .auth-button {
+            display: inline-block;
+            background: #0077b5;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .auth-button:hover {
+            background: #005885;
+        }
+        .code-block {
+            background: #f1f3f4;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0077b5;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 12px;
+        }
+        .copy-button:hover {
+            background: #218838;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LinkedIn OAuth Setup</h1>
+            <p>AI Builders Community - Automated Posting Setup</p>
+        </div>
+
+        <!-- Step 1: LinkedIn App Configuration -->
+        <div class="step">
+            <h2>Step 1: Configure Your LinkedIn App</h2>
+            <p>Before starting the OAuth flow, make sure your LinkedIn Developer App is properly configured:</p>
+            
+            <div class="instructions">
+                <strong>Required Redirect URIs:</strong>
+                <div class="code-block">https://rsham004.github.io/aibuilders-landing/linkedin-oauth.html</div>
+                <div class="code-block">http://localhost:3000/callback</div>
+                
+                <p><strong>Required Products/Scopes:</strong></p>
+                <ul>
+                    <li>Sign In with LinkedIn (openid, profile)</li>
+                    <li>Share on LinkedIn (w_member_social)</li>
+                </ul>
+                
+                <p>Add these redirect URIs in your LinkedIn app settings at <a href="https://www.linkedin.com/developers/apps" target="_blank">LinkedIn Developer Console</a></p>
+            </div>
+        </div>
+
+        <!-- Step 2: Authorization -->
+        <div class="step">
+            <h2>Step 2: Authorize Application</h2>
+            <p>Click the button below to start the LinkedIn OAuth flow:</p>
+            <a href="#" class="auth-button" id="authButton">Authorize with LinkedIn</a>
+        </div>
+
+        <!-- Step 3: Results -->
+        <div class="step">
+            <h2>Step 3: OAuth Results</h2>
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                Processing OAuth callback...
+            </div>
+            
+            <div id="success" class="success hidden">
+                <h3>OAuth Success!</h3>
+                <p><strong>Authorization Code:</strong></p>
+                <div class="code-block" id="authCode"></div>
+                <button class="copy-button" onclick="copyToClipboard('authCode')">Copy Code</button>
+                
+                <p><strong>State Parameter:</strong></p>
+                <div class="code-block" id="stateParam"></div>
+                <button class="copy-button" onclick="copyToClipboard('stateParam')">Copy State</button>
+                
+                <div class="instructions">
+                    <p><strong>Next Steps:</strong></p>
+                    <ol>
+                        <li>Copy the authorization code above</li>
+                        <li>Run the Node.js script: <code>node linkedin-oauth.js</code></li>
+                        <li>Paste the authorization code when prompted</li>
+                        <li>The script will exchange the code for an access token</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="error" class="error hidden">
+                <h3>OAuth Error</h3>
+                <p id="errorMessage"></p>
+                <div class="instructions">
+                    <p><strong>Common Solutions:</strong></p>
+                    <ul>
+                        <li>Make sure the redirect URI is exactly: <code>https://rsham004.github.io/aibuilders-landing/linkedin-oauth.html</code></li>
+                        <li>Verify your LinkedIn app has the required products enabled</li>
+                        <li>Check that your client ID is correct: <code>86pi8jjap21avr</code></li>
+                        <li>Try the manual token exchange method below</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Manual Method -->
+        <div class="step">
+            <h2>Alternative: Manual OAuth URL</h2>
+            <p>If the button above doesn't work, you can manually construct the OAuth URL:</p>
+            <div class="code-block" id="manualOAuthURL"></div>
+            <button class="copy-button" onclick="copyToClipboard('manualOAuthURL')">Copy URL</button>
+            
+            <p>Copy this URL to your browser, complete the authorization, then copy the authorization code from the callback URL.</p>
+        </div>
+
+        <!-- Instructions for local development -->
+        <div class="step">
+            <h2>Local Development Option</h2>
+            <p>For local development, you can also run the Node.js OAuth server:</p>
+            <div class="code-block">npm install
+node linkedin-oauth.js --server</div>
+            <p>This will start a local server at <code>http://localhost:3000</code> with automatic token exchange.</p>
+        </div>
+    </div>
+
+    <script>
+        const CLIENT_ID = '86pi8jjap21avr';
+        const REDIRECT_URI = 'https://rsham004.github.io/aibuilders-landing/linkedin-oauth.html';
+        const SCOPES = 'openid profile w_member_social';
+        
+        // Generate a random state parameter for security
+        function generateState() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+        
+        // Initialize the page
+        function init() {
+            const state = generateState();
+            localStorage.setItem('linkedin_oauth_state', state);
+            
+            // Set up the authorization URL
+            const authURL = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPES)}&state=${state}`;
+            
+            document.getElementById('authButton').href = authURL;
+            document.getElementById('manualOAuthURL').textContent = authURL;
+            
+            // Check if we're returning from OAuth
+            checkOAuthCallback();
+        }
+        
+        // Check if this is an OAuth callback
+        function checkOAuthCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            const error = urlParams.get('error');
+            const errorDescription = urlParams.get('error_description');
+            
+            if (error) {
+                showError(`OAuth Error: ${error}`, errorDescription);
+                return;
+            }
+            
+            if (code) {
+                showLoading();
+                
+                // Verify state parameter
+                const storedState = localStorage.getItem('linkedin_oauth_state');
+                if (state !== storedState) {
+                    showError('Security Error', 'State parameter mismatch. This could indicate a CSRF attack.');
+                    return;
+                }
+                
+                // Show success with the authorization code
+                setTimeout(() => {
+                    showSuccess(code, state);
+                }, 1000);
+            }
+        }
+        
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('success').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+        }
+        
+        function showSuccess(code, state) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+            document.getElementById('error').classList.add('hidden');
+            
+            document.getElementById('authCode').textContent = code;
+            document.getElementById('stateParam').textContent = state;
+        }
+        
+        function showError(error, description) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+            
+            let errorMsg = error;
+            if (description) {
+                errorMsg += ': ' + description;
+            }
+            document.getElementById('errorMessage').textContent = errorMsg;
+        }
+        
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.nextElementSibling;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#28a745';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy to clipboard. Please manually copy the text.');
+            });
+        }
+        
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
