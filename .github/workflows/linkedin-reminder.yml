@@ -5,12 +5,14 @@ on:
     # Runs every Sunday at 5:00 PM NZST
     - cron: '0 5 * * 0'  # 5:00 AM UTC = 6:00 PM NZDT / 5:00 PM NZST
   
-  # Allow manual triggering
+  # Allow manual triggering only
   workflow_dispatch:
 
 jobs:
   post-to-linkedin:
     runs-on: ubuntu-latest
+    # Only run on schedule or manual trigger, never on push
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     
     steps:
     - name: Checkout repository
