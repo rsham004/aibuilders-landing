@@ -6,11 +6,7 @@
   "scripts": {
     "start": "node fetch-discussions.js",
     "fetch": "node fetch-discussions.js",
-    "serve": "python -m http.server 8000",
-    "linkedin:setup": "node linkedin-oauth.js",
-    "linkedin:test": "node linkedin-posting.js test",
-    "linkedin:post": "node linkedin-posting.js post",
-    "linkedin:server": "node linkedin-oauth.js --server"
+    "serve": "python -m http.server 8000"
   },
   "keywords": [
     "github",
@@ -18,10 +14,7 @@
     "landing-page",
     "ai-builders",
     "community",
-    "github-actions",
-    "linkedin",
-    "oauth",
-    "automation"
+    "github-actions"
   ],
   "author": "AI Builders Community",
   "license": "MIT",
@@ -32,17 +25,5 @@
     "win32",
     "darwin",
     "linux"
-  ],
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rsham004/aibuilders-landing.git"
-  },
-  "bugs": {
-    "url": "https://github.com/rsham004/aibuilders-landing/issues"
-  },
-  "homepage": "https://rsham004.github.io/aibuilders-landing/"
+  ]
 }
