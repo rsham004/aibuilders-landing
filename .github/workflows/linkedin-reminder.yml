@@ -1,12 +1,19 @@
 name: Weekly LinkedIn Auto Post
 
+# IMPORTANT: This workflow ONLY runs on schedule and manual trigger
+# It should NEVER run on push events
 on:
   schedule:
-    # Runs every Sunday at 5:00 PM NZST
-    - cron: '0 5 * * 0'  # 5:00 AM UTC = 6:00 PM NZDT / 5:00 PM NZST
+    # Runs every Sunday at 5:00 PM NZST (5:00 AM UTC)
+    - cron: '0 5 * * 0'
   
-  # Allow manual triggering only
+  # Manual triggering for testing
   workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Run in debug mode'
+        required: false
+        default: 'false'
 
 jobs:
   post-to-linkedin:
