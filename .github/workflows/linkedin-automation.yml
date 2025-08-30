@@ -1,10 +1,11 @@
-name: Weekly LinkedIn Auto Post
+name: LinkedIn Marketing Automation
 
-# IMPORTANT: This workflow ONLY runs on schedule and manual trigger
-# It should NEVER run on push events
+# SEPARATE from GitHub Discussions workflows
+# This workflow handles LinkedIn posting ONLY
+# Runs independently without affecting discussions updates
 on:
   schedule:
-    # Runs every Sunday at 5:00 PM NZST (5:00 AM UTC)
+    # Every Sunday at 5:00 PM NZST (5:00 AM UTC)
     - cron: '0 5 * * 0'
   
   # Manual triggering for testing
@@ -12,6 +13,10 @@ on:
     inputs:
       debug:
         description: 'Run in debug mode'
+        required: false
+        default: 'false'
+      test_post:
+        description: 'Create test post'
         required: false
         default: 'false'
 
@@ -93,11 +98,11 @@ with open(log_file, 'w') as f:
     json.dump(log_data, f, indent=2)
 "
           
-          # Commit the log updates
+          # Commit ONLY LinkedIn-related log files (separate from discussions)
           git add marketing/logs/activity.log marketing/posts/ai-builders-community/posting-log.json
-          git config --global user.email "noreply@github.com"
-          git config --global user.name "LinkedIn Auto-poster"
-          git commit -m "📊 Log LinkedIn post: $POST_ID - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git config --global user.email "linkedin-automation@users.noreply.github.com"
+          git config --global user.name "LinkedIn Marketing Bot"
+          git commit -m "📊 LinkedIn post logged: $POST_ID - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
           git push || echo "Push failed - continuing anyway"
           
           # Create success issue for tracking  
@@ -143,11 +148,11 @@ with open(log_file, 'w') as f:
     json.dump(log_data, f, indent=2)
 "
           
-          # Commit the error logs
+          # Commit ONLY LinkedIn error logs (separate from discussions)
           git add marketing/logs/activity.log marketing/logs/errors.log marketing/posts/ai-builders-community/posting-log.json 2>/dev/null || true
-          git config --global user.email "noreply@github.com"
-          git config --global user.name "LinkedIn Auto-poster"
-          git commit -m "🚨 Log LinkedIn post failure - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git config --global user.email "linkedin-automation@users.noreply.github.com"
+          git config --global user.name "LinkedIn Marketing Bot"
+          git commit -m "🚨 LinkedIn post failure logged - $(date '+%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
           git push || echo "Push failed - continuing anyway"
           
           # Create failure issue for debugging
