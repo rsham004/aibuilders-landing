@@ -51,16 +51,14 @@ jobs:
           # Create success issue for tracking  
           gh issue create \
             --title "✅ LinkedIn Post Created - $(date '+%Y-%m-%d')" \
-            --body "LinkedIn post was automatically created on $(date).\n\n**Post ID:** $POST_ID\n\n**API Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`" \
-            --label "social-media"
+            --body "LinkedIn post was automatically created on $(date).\n\n**Post ID:** $POST_ID\n\n**API Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`"
         else
           echo "❌ LinkedIn post failed!"
           
           # Create failure issue for debugging
           gh issue create \
             --title "❌ LinkedIn Post Failed - $(date '+%Y-%m-%d')" \
-            --body "LinkedIn post failed on $(date).\n\n**Error Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`\n\nPlease check the LinkedIn access token and API configuration." \
-            --label "bug"
+            --body "LinkedIn post failed on $(date).\n\n**Error Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`\n\nPlease check the LinkedIn access token and API configuration."
           
           exit 1
         fi
