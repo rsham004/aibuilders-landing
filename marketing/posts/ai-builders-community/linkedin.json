@@ -1,0 +1,14 @@
+{
+  "platform": "linkedin",
+  "author_urn": "urn:li:person:LFmKmXorjj",
+  "post_type": "ugc",
+  "visibility": "PUBLIC",
+  "content": {
+    "text": "🚀 Ready to accelerate your AI learning journey?\n\nJoin the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!\n\n✨ What makes us different:\n• Use case-driven learning (no more tutorial hell!)\n• Structured pathway from Explorer to Builder\n• Real-world projects with mockups & wireframes\n• Safe learning space free of judgment\n• Community of like-minded AI enthusiasts\n\nWhether you're a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.\n\n🎯 Ready to build your AI future?\n\n#AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation\n\n✨ Join us today!"
+  },
+  "media": {
+    "type": "none"
+  },
+  "api_version": "v2",
+  "endpoint": "ugcPosts"
+}

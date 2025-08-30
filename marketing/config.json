@@ -1,0 +1,35 @@
+{
+  "marketing_config": {
+    "version": "1.0",
+    "last_updated": "2025-08-30",
+    "default_timezone": "Pacific/Auckland",
+    "platforms": {
+      "linkedin": {
+        "enabled": true,
+        "api_version": "v2",
+        "rate_limits": {
+          "posts_per_day": 250,
+          "posts_per_hour": 25
+        }
+      }
+    },
+    "posting_schedule": {
+      "check_frequency": "hourly",
+      "retry_failed_posts": true,
+      "max_retries": 3
+    },
+    "content_management": {
+      "posts_directory": "./posts",
+      "backup_posts": true,
+      "track_performance": false
+    }
+  },
+  "active_posts": [
+    {
+      "post_id": "ai-builders-community",
+      "folder": "./posts/ai-builders-community",
+      "status": "active",
+      "next_scheduled": null
+    }
+  ]
+}
