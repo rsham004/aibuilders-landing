@@ -1,0 +1,20 @@
+{
+  "post_id": "ai-builders-community",
+  "title": "AI Builders Community Weekly Post",
+  "description": "Weekly promotional post for the AI Builders Community highlighting our unique approach to AI learning",
+  "platforms": ["linkedin"],
+  "schedule": {
+    "frequency": "weekly",
+    "day_of_week": "sunday",
+    "time": "17:00",
+    "timezone": "Pacific/Auckland"
+  },
+  "content_format": "text_with_hashtags",
+  "active": true,
+  "created_date": "2025-08-30",
+  "last_posted": null,
+  "variations": {
+    "enabled": false,
+    "rotate_call_to_action": false
+  }
+}
