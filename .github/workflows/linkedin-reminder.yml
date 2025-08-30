@@ -1,4 +1,4 @@
-name: Weekly LinkedIn Post Reminder
+name: Weekly LinkedIn Auto Post
 
 on:
   schedule:
@@ -9,65 +9,95 @@ on:
   workflow_dispatch:
 
 jobs:
-  create-reminder:
+  post-to-linkedin:
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Create LinkedIn Post Reminder Issue
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const postContent = `🚀 Ready to accelerate your AI learning journey?
+    - name: Post to LinkedIn
+      run: |
+        # Create the LinkedIn post content
+        POST_CONTENT='🚀 Ready to accelerate your AI learning journey?
 
-          Join the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!
+        Join the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!
 
-          ✨ What makes us different:
-          • Use case-driven learning (no more tutorial hell!)
-          • Structured pathway from Explorer to Builder
-          • Real-world projects with mockups & wireframes
-          • Safe learning space free of judgment
-          • Community of like-minded AI enthusiasts
+        ✨ What makes us different:
+        • Use case-driven learning (no more tutorial hell!)
+        • Structured pathway from Explorer to Builder  
+        • Real-world projects with mockups & wireframes
+        • Safe learning space free of judgment
+        • Community of like-minded AI enthusiasts
 
-          Whether you're a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.
+        Whether you'\''re a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.
 
-          🎯 Ready to build your AI future?
+        🎯 Ready to build your AI future?
 
-          #AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation`;
+        #AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation'
 
-          const issueBody = `## 📅 Weekly LinkedIn Post Reminder
+        # Create JSON payload for LinkedIn API
+        JSON_PAYLOAD=$(cat <<EOF
+        {
+          "author": "urn:li:person:LFmKmXorjj",
+          "lifecycleState": "PUBLISHED",
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareCommentary": {
+                "text": "$POST_CONTENT"
+              },
+              "shareMediaCategory": "NONE"
+            }
+          },
+          "visibility": {
+            "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+          }
+        }
+        EOF
+        )
+
+        # Post to LinkedIn API
+        RESPONSE=$(curl -s -X POST "https://api.linkedin.com/v2/ugcPosts" \
+          -H "Authorization: Bearer ${{ secrets.LINKEDIN_ACCESS_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d "$JSON_PAYLOAD")
+
+        echo "LinkedIn API Response: $RESPONSE"
+
+        # Check if post was successful
+        if echo "$RESPONSE" | grep -q '"id"'; then
+          echo "✅ LinkedIn post created successfully!"
           
-          It's time for your weekly LinkedIn post! 🎉
+          # Create success issue for tracking
+          gh issue create \
+            --title "✅ LinkedIn Post Created - $(date '+%Y-%m-%d')" \
+            --body "LinkedIn post was automatically created on $(date).
+
+          **Post Content:**
+          $POST_CONTENT
+
+          **API Response:**
+          \`\`\`json
+          $RESPONSE
+          \`\`\`" \
+            --label "linkedin,automated,success"
+        else
+          echo "❌ LinkedIn post failed!"
           
-          **Scheduled for:** Sunday, ${new Date().toLocaleDateString()} at 5:00 PM NZST
-          
-          ### Post Content:
+          # Create failure issue for debugging
+          gh issue create \
+            --title "❌ LinkedIn Post Failed - $(date '+%Y-%m-%d')" \
+            --body "LinkedIn post failed on $(date).
+
+          **Error Response:**
+          \`\`\`json
+          $RESPONSE
           \`\`\`
-          ${postContent}
-          \`\`\`
-          
-          ### Quick Actions:
-          - [ ] Copy the content above
-          - [ ] Post to LinkedIn
-          - [ ] Close this issue when done
-          
-          ### LinkedIn Posting Tips:
-          - Post when your audience is most active
-          - Engage with comments quickly after posting
-          - Consider adding a relevant image or carousel
-          - Tag relevant people if appropriate
-          
-          ---
-          *This reminder was automatically created by GitHub Actions*`;
 
-          await github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `📱 LinkedIn Post Reminder - ${new Date().toDateString()}`,
-            body: issueBody,
-            labels: ['reminder', 'social-media', 'linkedin']
-          });
+          Please check the LinkedIn access token and API configuration." \
+            --label "linkedin,automated,error"
           
-          console.log('✅ LinkedIn post reminder issue created successfully!');
+          exit 1
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
