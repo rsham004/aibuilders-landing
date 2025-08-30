@@ -1,0 +1,73 @@
+name: Weekly LinkedIn Post Reminder
+
+on:
+  schedule:
+    # Runs every Sunday at 5:00 PM NZST
+    - cron: '0 5 * * 0'  # 5:00 AM UTC = 6:00 PM NZDT / 5:00 PM NZST
+  
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  create-reminder:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Create LinkedIn Post Reminder Issue
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const postContent = `🚀 Ready to accelerate your AI learning journey?
+
+          Join the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!
+
+          ✨ What makes us different:
+          • Use case-driven learning (no more tutorial hell!)
+          • Structured pathway from Explorer to Builder
+          • Real-world projects with mockups & wireframes
+          • Safe learning space free of judgment
+          • Community of like-minded AI enthusiasts
+
+          Whether you're a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.
+
+          🎯 Ready to build your AI future?
+
+          #AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation`;
+
+          const issueBody = `## 📅 Weekly LinkedIn Post Reminder
+          
+          It's time for your weekly LinkedIn post! 🎉
+          
+          **Scheduled for:** Sunday, ${new Date().toLocaleDateString()} at 5:00 PM NZST
+          
+          ### Post Content:
+          \`\`\`
+          ${postContent}
+          \`\`\`
+          
+          ### Quick Actions:
+          - [ ] Copy the content above
+          - [ ] Post to LinkedIn
+          - [ ] Close this issue when done
+          
+          ### LinkedIn Posting Tips:
+          - Post when your audience is most active
+          - Engage with comments quickly after posting
+          - Consider adding a relevant image or carousel
+          - Tag relevant people if appropriate
+          
+          ---
+          *This reminder was automatically created by GitHub Actions*`;
+
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `📱 LinkedIn Post Reminder - ${new Date().toDateString()}`,
+            body: issueBody,
+            labels: ['reminder', 'social-media', 'linkedin']
+          });
+          
+          console.log('✅ LinkedIn post reminder issue created successfully!');

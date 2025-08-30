@@ -1,0 +1,38 @@
+name: Weekly LinkedIn Post
+
+on:
+  schedule:
+    # Runs every Sunday at 5:00 PM NZST (UTC+12 in summer, UTC+13 in winter)
+    # Using 05:00 UTC for NZDT (summer) and 04:00 UTC for NZST (winter)
+    # GitHub Actions uses UTC, so we'll use 05:00 UTC (17:00 NZDT)
+    - cron: '0 5 * * 0'  # 5:00 AM UTC = 6:00 PM NZDT / 5:00 PM NZST
+  
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  post-to-linkedin:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install axios dotenv
+        
+    - name: Post to LinkedIn
+      env:
+        LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+        LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+      run: node .github/scripts/linkedin-post.js
+      
+    - name: Log posting result
+      run: echo "LinkedIn post attempted at $(date)"
