@@ -18,86 +18,54 @@ jobs:
       
     - name: Post to LinkedIn
       run: |
-        # Create the LinkedIn post content
-        POST_CONTENT='🚀 Ready to accelerate your AI learning journey?
-
-        Join the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!
-
-        ✨ What makes us different:
-        • Use case-driven learning (no more tutorial hell!)
-        • Structured pathway from Explorer to Builder  
-        • Real-world projects with mockups & wireframes
-        • Safe learning space free of judgment
-        • Community of like-minded AI enthusiasts
-
-        Whether you'\''re a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.
-
-        🎯 Ready to build your AI future?
-
-        #AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation'
-
-        # Create JSON payload for LinkedIn API
-        JSON_PAYLOAD=$(cat <<EOF
-        {
-          "author": "urn:li:person:LFmKmXorjj",
-          "lifecycleState": "PUBLISHED",
-          "specificContent": {
-            "com.linkedin.ugc.ShareContent": {
-              "shareCommentary": {
-                "text": "$POST_CONTENT"
-              },
-              "shareMediaCategory": "NONE"
-            }
-          },
-          "visibility": {
-            "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
-          }
-        }
-        EOF
-        )
-
-        # Post to LinkedIn API
-        RESPONSE=$(curl -s -X POST "https://api.linkedin.com/v2/ugcPosts" \
+        # Create JSON payload for LinkedIn API with properly escaped content
+        curl -s -X POST "https://api.linkedin.com/v2/ugcPosts" \
           -H "Authorization: Bearer ${{ secrets.LINKEDIN_ACCESS_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d "$JSON_PAYLOAD")
+          -d '{
+            "author": "urn:li:person:LFmKmXorjj",
+            "lifecycleState": "PUBLISHED",
+            "specificContent": {
+              "com.linkedin.ugc.ShareContent": {
+                "shareCommentary": {
+                  "text": "🚀 Ready to accelerate your AI learning journey?\n\nJoin the AI Builders Community where we turn curiosity into capability through hands-on collaborative projects!\n\n✨ What makes us different:\n• Use case-driven learning (no more tutorial hell!)\n• Structured pathway from Explorer to Builder\n• Real-world projects with mockups & wireframes\n• Safe learning space free of judgment\n• Community of like-minded AI enthusiasts\n\nWhether you'\''re a complete beginner or looking to upskill, we meet you where you are and help you reach where you want to go.\n\n🎯 Ready to build your AI future?\n\n#AI #ArtificialIntelligence #AILearning #TechCommunity #SkillDevelopment #AIEducation #ProductFoundry #FutureOfWork #MachineLearning #Innovation"
+                },
+                "shareMediaCategory": "NONE"
+              }
+            },
+            "visibility": {
+              "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+            }
+          }' > linkedin_response.json
 
+        # Check response
+        RESPONSE=$(cat linkedin_response.json)
         echo "LinkedIn API Response: $RESPONSE"
 
         # Check if post was successful
         if echo "$RESPONSE" | grep -q '"id"'; then
           echo "✅ LinkedIn post created successfully!"
+          POST_ID=$(echo "$RESPONSE" | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
+          echo "Post ID: $POST_ID"
           
-          # Create success issue for tracking
+          # Create success issue for tracking  
           gh issue create \
             --title "✅ LinkedIn Post Created - $(date '+%Y-%m-%d')" \
-            --body "LinkedIn post was automatically created on $(date).
-
-          **Post Content:**
-          $POST_CONTENT
-
-          **API Response:**
-          \`\`\`json
-          $RESPONSE
-          \`\`\`" \
-            --label "linkedin,automated,success"
+            --body "LinkedIn post was automatically created on $(date).\n\n**Post ID:** $POST_ID\n\n**API Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`" \
+            --label "social-media"
         else
           echo "❌ LinkedIn post failed!"
           
           # Create failure issue for debugging
           gh issue create \
             --title "❌ LinkedIn Post Failed - $(date '+%Y-%m-%d')" \
-            --body "LinkedIn post failed on $(date).
-
-          **Error Response:**
-          \`\`\`json
-          $RESPONSE
-          \`\`\`
-
-          Please check the LinkedIn access token and API configuration." \
-            --label "linkedin,automated,error"
+            --body "LinkedIn post failed on $(date).\n\n**Error Response:**\n\`\`\`json\n$RESPONSE\n\`\`\`\n\nPlease check the LinkedIn access token and API configuration." \
+            --label "bug"
           
           exit 1
         fi
+        
+        # Cleanup
+        rm -f linkedin_response.json
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
