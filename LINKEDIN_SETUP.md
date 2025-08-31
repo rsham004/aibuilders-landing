@@ -8,9 +8,7 @@ This guide will help you set up LinkedIn OAuth authentication for automated post
 ### 1. Prerequisites
 
 - Node.js 14+ installed
-- LinkedIn Developer App created with:
-  - **Client ID**: `YOUR_CLIENT_ID`
-  - **Client Secret**: `YOUR_CLIENT_SECRET`
+- LinkedIn Developer App created with proper OAuth credentials
 - Access to LinkedIn Developer Console
 
 ### 2. Installation
@@ -216,7 +214,7 @@ node linkedin-posting.js custom "text"  # Create custom post
 **Error**: `invalid_client`
 
 **Solution**:
-- Verify Client ID: `YOUR_CLIENT_ID`
+- Verify your LinkedIn app's Client ID is correct
 - Check Client Secret is correct
 - Ensure app is not in development restrictions
 
