@@ -402,7 +402,7 @@
     "created_at": "2025-08-29T19:35:38Z",
     "number": 37,
     "title": "openAI Prompt Enhancer",
-    "updated_at": "2025-08-29T19:35:39Z",
+    "updated_at": "2025-08-31T16:49:07Z",
     "url": "https://github.com/AI-Product-Development/aibuilders/discussions/37",
     "user": "rsham004"
   },
@@ -415,6 +415,28 @@
     "title": "Best practice for context engineering with an IDE or autonomous coding tool",
     "updated_at": "2025-08-29T22:44:15Z",
     "url": "https://github.com/AI-Product-Development/aibuilders/discussions/38",
+    "user": "rsham004"
+  },
+  {
+    "body": "run Qwen3 with ollama in docker; run https://github.com/musistudio/claude-code-router without any transformers; export ANTHROPIC_BASE_URL= to make Claude Code call a router and export ANTHROPIC_MODEL=\"ollama,qwen3:8b\" to use a correct model. It seems to work.\r\n",
+    "category": "SPARC and agentic frameworks",
+    "comments": 0,
+    "created_at": "2025-08-31T06:39:29Z",
+    "number": 39,
+    "title": "how Qwen3 + Ollama + Claude Flow (or some other PM-integrated tooling)",
+    "updated_at": "2025-08-31T06:39:30Z",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/39",
+    "user": "rsham004"
+  },
+  {
+    "body": "https://www.voiceaispace.com/library",
+    "category": "Document your best practices & learnings",
+    "comments": 0,
+    "created_at": "2025-08-31T16:43:02Z",
+    "number": 40,
+    "title": "Resources on voice agents",
+    "updated_at": "2025-08-31T16:48:30Z",
+    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/40",
     "user": "rsham004"
   }
 ]
