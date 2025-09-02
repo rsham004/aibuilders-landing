@@ -38,9 +38,6 @@ linkedin-*.backup
 linkedin-api.log
 oauth-flow.log
 
-# Instagram tracking files
-last-instagram-post.json
-instagram-posting-log.json
 
 # macOS
 .DS_Store

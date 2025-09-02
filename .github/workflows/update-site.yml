@@ -31,9 +31,6 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
-
     - name: Setup GitHub CLI
       run: |
         # GitHub CLI is pre-installed on GitHub runners
@@ -50,14 +47,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Post to Instagram from content posts
-      run: |
-        node post-to-instagram.js
-      env:
-        INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
-        INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
-      continue-on-error: true
-
     - name: Update timestamp in HTML
       run: |
         # Add a comment with timestamp to force cache refresh
@@ -70,7 +59,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit - discussions data is up to date"
         else
-          git commit -m "🔄 Auto-update discussions data and Instagram posts - $(date -u +"%Y-%m-%d %H:%M UTC")"
+          git commit -m "🔄 Auto-update discussions data - $(date -u +"%Y-%m-%d %H:%M UTC")"
           git push
           echo "✅ Updated discussions data and deployed to GitHub Pages"
         fi

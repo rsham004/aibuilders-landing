@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node fetch-discussions.js",
     "fetch": "node fetch-discussions.js",
-    "serve": "python -m http.server 8000",
-    "post-instagram": "node post-to-instagram.js"
+    "serve": "python -m http.server 8000"
   },
   "keywords": [
     "github",
@@ -26,9 +25,5 @@
     "win32",
     "darwin",
     "linux"
-  ],
-  "dependencies": {
-    "dotenv": "^16.6.1",
-    "instagram-private-api": "^1.46.0"
-  }
+  ]
 }
