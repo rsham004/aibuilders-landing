@@ -2,7 +2,10 @@
   "post_id": "ai-builders-community",
   "title": "AI Builders Community Weekly Post",
   "description": "Weekly promotional post for the AI Builders Community highlighting our unique approach to AI learning",
-  "platforms": ["linkedin"],
+  "platforms": [
+    "linkedin",
+    "instagram"
+  ],
   "schedule": {
     "frequency": "weekly",
     "day_of_week": "sunday",
