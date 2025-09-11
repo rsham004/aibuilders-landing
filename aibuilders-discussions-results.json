@@ -440,13 +440,13 @@
     "user": "rsham004"
   },
   {
-    "body": "I have been going down some rabbit holes - Tying to get familiar with cheaper options than factory.ai and establish a good workflow. You may have talked about some of these things in meetings but I might have missed them. Quick mind dump ( just because the free Grok code deal will run out in about 5 days ) :\r\n \r\nFactory.ai is good but you don't have as much control ( except \"Droids\" - and sometimes it starts coding when you are in planning mode) .  I think in Roo Code with \"Modes\" you can achieve the same thing as droids in Factory.  Factory sometimes does very complex things well - and sometimes takes a long time to fail on something very simple. for the most part very good and easy - but becoming too expensive compared with other options\r\nCode indexing/ context in factory.ai uses regex expressions as opposed to a RAG type .  Much faster - but there is a debate out there as to what is better.\r\nOn this journey, I discovered https://kilocode.ai/  which is a fork of Roo and Cline .  they seem to have taken it a step further. They have their own api charging and they charge API calls at their cost .\r\nKilo code have an agreement with the new Grok fast code 1 model where you can use it for free until Sep 10th ( Not the best model for everything but very good for boilerplate & regular coding )\r\nI  just discovered https://morphllm.com/  which you can use within kilo code along with your LLM ( and maybe within Roo I am not sure ) .  A paid service that can cut your token usage and time to apply / read code .  Trained on code and has a reranking model for higher accuracy. https://morphllm.com/benchmarks  .  I guess using this you could use a cheaper reasoning model and get better results too with this.",
+    "body": ".",
     "category": "Document your best practices & learnings",
-    "comments": 3,
+    "comments": 0,
     "created_at": "2025-09-04T22:55:43Z",
     "number": 41,
-    "title": "Moving from Factory.AI to Roo / KiloCode  ( cheaper , more control )",
-    "updated_at": "2025-09-07T22:30:04Z",
+    "title": ".",
+    "updated_at": "2025-09-11T22:50:32Z",
     "url": "https://github.com/AI-Product-Development/aibuilders/discussions/41",
     "user": "martyjt"
   }
