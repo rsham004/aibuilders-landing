@@ -308,17 +308,6 @@
     "user": "rsham004"
   },
   {
-    "body": "Member Discussions \r\nMonthly from 11 Sep 2025 Thursday 11 am NZST\r\nhttps://meet.google.com/dfg-dfsn-byj \r\n\r\nMember Demos \r\nMonthly from 25 Sep 2025 Thursday 11 am NZST\r\nhttps://meet.google.com/dqy-aoye-oon",
-    "category": "Announcements",
-    "comments": 0,
-    "created_at": "2025-08-28T04:03:10Z",
-    "number": 29,
-    "title": "Meeting URLS",
-    "updated_at": "2025-08-30T00:48:39Z",
-    "url": "https://github.com/AI-Product-Development/aibuilders/discussions/29",
-    "user": "rsham004"
-  },
-  {
     "body": "https://zed.dev/docs/ai/overview\r\n\r\n[AI](https://zed.dev/docs/ai/overview#ai)\r\nLearn how to get started using AI with Zed and all its capabilities.\r\n\r\n[Setting up AI in Zed](https://zed.dev/docs/ai/overview#setting-up-ai-in-zed)\r\n[Configuration](https://zed.dev/docs/ai/configuration.html): Learn how to set up different language model providers like Anthropic, OpenAI, Ollama, Google AI, and more.\r\n\r\n[External Agents](https://zed.dev/docs/ai/external-agents.html): Learn how to plug in your favorite agent into Zed.\r\n\r\n[Subscription](https://zed.dev/docs/ai/subscription.html): Learn about Zed's hosted model service and other billing-related information.\r\n\r\n[Privacy and Security](https://zed.dev/docs/ai/privacy-and-security.html): Understand how Zed handles privacy and security with AI features.\r\n\r\n[Agentic Editing](https://zed.dev/docs/ai/overview#agentic-editing)\r\n[Agent Panel](https://zed.dev/docs/ai/agent-panel.html): Create and manage interactions with language models.\r\n\r\n[Rules](https://zed.dev/docs/ai/rules.html): How to define rules for AI interactions.\r\n\r\n[Tools](https://zed.dev/docs/ai/tools.html): Explore the tools that enable agentic capabilities.\r\n\r\n[Model Context Protocol](https://zed.dev/docs/ai/mcp.html): Learn about how to install and configure MCP servers.\r\n\r\n[Inline Assistant](https://zed.dev/docs/ai/inline-assistant.html): Discover how to use the agent to power inline transformations directly within a file or terminal.\r\n\r\n[Edit Prediction](https://zed.dev/docs/ai/overview#edit-prediction)\r\n[Edit Prediction](https://zed.dev/docs/ai/edit-prediction.html): Learn about Zed's AI prediction feature that helps autocomplete your code.\r\n[Text Threads](https://zed.dev/docs/ai/overview#text-threads)\r\n[Text Threads](https://zed.dev/docs/ai/text-threads.html): Learn about an alternative, text-based interface for interacting with language models.\r\n",
     "category": "General",
     "comments": 0,
